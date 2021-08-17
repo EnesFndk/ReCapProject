@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Contrete;
 using System;
@@ -16,37 +18,39 @@ namespace Business.Contrete
             _brandDal = brandDal;
         }
 
-        public void Add(Brand brand)
+        public IResult Add(Brand brand)
         {
             if (brand.Name.Length < 2)
             {
-                throw new Exception("Araba ismi 2 karakterden küçük olamaz");
+                return new ErrorResult(Messages.BrandNameInvalid);
             }
 
-            if (brand.Id <= 0)
-            {
-                throw new Exception("Araba fiyatı 0 veya 0'dan küçük olamaz");
-            }
+            return new ErrorResult(Messages.BrandAdded);
+
             _brandDal.Add(brand);
         }
 
-        public void Delete(Brand brand)
+        public IResult Delete(Brand brand)
         {
+            return new ErrorResult(Messages.BrandDeleted);
+
             _brandDal.Delete(brand);
         }
 
-        public List<Brand> GetAll()
+        public IDataResult<List<Brand>> GetAll()
         {
-            return _brandDal.GetAll();
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll());
         }
 
-        public Brand GetById(int brandId)
+        public IDataResult<Brand> GetById(int brandId)
         {
-            return _brandDal.Get(b => b.Id == brandId);
+            return new SuccessDataResult<Brand>(_brandDal.Get(b => b.Id == brandId));
         }
 
-        public void Update(Brand brand)
+        public IResult Update(Brand brand)
         {
+            return new ErrorResult(Messages.BrandModified);
+
             _brandDal.Update(brand);
         }
     }
