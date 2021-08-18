@@ -25,16 +25,16 @@ namespace Business.Contrete
                 return new ErrorResult(Messages.BrandNameInvalid);
             }
 
-            return new ErrorResult(Messages.BrandAdded);
-
             _brandDal.Add(brand);
+
+            return new ErrorResult(Messages.BrandAdded);
         }
 
         public IResult Delete(Brand brand)
         {
-            return new ErrorResult(Messages.BrandDeleted);
-
             _brandDal.Delete(brand);
+
+            return new ErrorResult(Messages.BrandDeleted);
         }
 
         public IDataResult<List<Brand>> GetAll()
@@ -49,9 +49,9 @@ namespace Business.Contrete
 
         public IResult Update(Brand brand)
         {
-            return new ErrorResult(Messages.BrandModified);
-
             _brandDal.Update(brand);
+
+            return new ErrorResult(Messages.BrandModified);
         }
     }
 }

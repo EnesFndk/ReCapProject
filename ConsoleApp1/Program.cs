@@ -12,6 +12,37 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
+
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            Rental rental = new Rental();
+            rental.Id = 1;
+            rental.CustomerId = 1;
+            rental.RentDate = new DateTime(2021, 08, 15);
+            rental.ReturnDate = new DateTime(2021, 08, 17);
+            var result = rentalManager.Add(rental);
+            Console.WriteLine(result.Message);
+
+
+
+
+
+            //ICustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            //foreach (var cu in customerManager.GetAll().Data)
+            //{
+            //    Console.WriteLine(cu.UserId.ToString(), cu.CompanyName);
+            //}
+            //Customer customer = new Customer()
+            //{
+            //    UserId = 2,
+            //    CompanyName = "Fındık Galeri"
+            //};
+
+            //customerManager.Add(customer);
+            //Console.WriteLine();
+
+
+
+
             //10. Ders Ödev 1
             ////BURADA CarManageri Result işleminde temiz kod ile yaptık.
             //CarManager carManager = new CarManager(new EfCarDal());

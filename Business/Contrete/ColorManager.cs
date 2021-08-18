@@ -20,16 +20,16 @@ namespace Business.Contrete
 
         public IResult Add(Color color)
         {
-            return new SuccessResult(Messages.ColorAdded);
-
             _colorDal.Add(color);
+
+            return new SuccessResult(Messages.ColorAdded);
         }
 
         public IResult Delete(Color color)
         {
-            return new SuccessResult(Messages.ColorDeleted);
-
             _colorDal.Delete(color);
+
+            return new SuccessResult(Messages.ColorDeleted);     
         }
 
         public IDataResult<List<Color>> GetAll()
@@ -44,9 +44,9 @@ namespace Business.Contrete
 
         public IResult Update(Color color)
         {
-            return new SuccessResult(Messages.ColorModified);
-
             _colorDal.Update(color);
+
+            return new SuccessResult(Messages.ColorModified);      
         }
     }
 }
