@@ -5,6 +5,7 @@ using DataAccess.Abstract;
 using Entities.Contrete;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Contrete
@@ -21,7 +22,7 @@ namespace Business.Contrete
         public IResult Add(Rental rental)
         {
 
-            if (CarDeliveryVerification(rental.CarId))
+            if (!CarDeliveryVerification(rental.CarId))
             {
                 return new ErrorResult(Messages.CarNotRented);
             }
@@ -32,8 +33,8 @@ namespace Business.Contrete
 
         private bool CarDeliveryVerification(int carId)
         {
-            var result = _rentalDal.Get(r => r.CarId == carId && r.ReturnDate == null);
-            if (result == null)
+            var result = _rentalDal.GetAll(r => r.CarId == carId).OrderByDescending(r=>r.Id).FirstOrDefault();
+            if (result == null || result.ReturnDate == null || result.ReturnDate.Date < DateTime.Now.Date)
             {
                 return true;
             }

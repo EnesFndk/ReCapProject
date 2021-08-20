@@ -27,7 +27,7 @@ namespace Business.Contrete
 
             _brandDal.Add(brand);
 
-            return new ErrorResult(Messages.BrandAdded);
+            return new SuccessResult(Messages.BrandAdded);
         }
 
         public IResult Delete(Brand brand)
@@ -39,7 +39,7 @@ namespace Business.Contrete
 
         public IDataResult<List<Brand>> GetAll()
         {
-            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll());
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(), Messages.BrandsListed);
         }
 
         public IDataResult<Brand> GetById(int brandId)
@@ -51,7 +51,7 @@ namespace Business.Contrete
         {
             _brandDal.Update(brand);
 
-            return new ErrorResult(Messages.BrandModified);
+            return new SuccessResult(Messages.BrandModified);
         }
     }
 }
