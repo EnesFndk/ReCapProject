@@ -26,6 +26,12 @@ namespace Business.Constants
         public static string RentalAdded = "Kiralama işlemi Eklendi";
         public static string RentalDeleted = "Kiralama işlemi Silindi";
         public static string RentalModified = "Kiralama işlemi Güncellendi";
+        public static string CarImageAdded = "Araba Resmi Eklendi";
+        public static string CarImageDeleted = "Araba Resmi Silindi";
+        public static string CarImageModified = "Araba Resmi Güncellendi";
+        public static string CarsImageListed = "Araba Resimleri Listelendi";
+        public static string CarImageNameInvalid = "Araba resmi Geçersiz";
+        public static string CarImageLimit = "Bir arabanın en fazla 5 resmi olabilir.";
         public static string CarName = "Araba ismi en az 2 karakterli olmalıdır.";
         public static string BrandNameInvalid = "Araba Markası Geçersiz";
         public static string MaintenanceTime = "Sistem Bakımda";
