@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Entities.Contrete;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Contrete;
@@ -48,7 +49,15 @@ namespace Business.Contrete
             return new SuccessDataResult<User>(_userDal.Get(u => u.Id == userId));
         }
 
+        public IDataResult<List<OperationClaim>> GetClaims(User user)
+        {
+            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
+        }
 
+        public IDataResult<User> GetByMail(string email)
+        {
 
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
+        }
     }
 }

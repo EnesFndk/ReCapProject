@@ -11,6 +11,8 @@ namespace Business.Constants
         public static string CarModified = "Araba Güncellendi";
         public static string CarNotRented = "Araba kiralanmadı";
         public static string CarRented = "Araba kiralandı";
+        public static string CarNotExist = "Araba mevcut değil";
+        public static string CarExist = "Araba mevcut";
         public static string BrandAdded = "Marka Eklendi";
         public static string BrandDeleted = "Marka Silindi";
         public static string BrandModified = "Marka Güncellendi";
@@ -41,6 +43,15 @@ namespace Business.Constants
         public static string UsersListed = "Kullanıcılar Listelendi";
         public static string CustomersListed = "Müşteriler Listelendi";
         public static string RentalsListed = "Kiralama işlemi Listelendi";
-        public static string DailyPriceLimit = "Araba fiyatı 0 veya 0'dan küçük olamaz"; 
+        public static string DailyPriceLimit = "Araba fiyatı 0 veya 0'dan küçük olamaz";
+        public static string AuthorizationDenied = "Yetkiniz yok";
+        public static string UserRegistered = "Kayıt başarılı bir şekilde gerçekleşti";
+        public static string UserNotFound = "Kullanıcı bulunamadı";
+        public static string PasswordError = "Parola yanlış tekrar deneyin";
+        public static string SuccessfulLogin = "Giriş başarıyla tamamlandı";
+        public static string UserAlreadyExists = "Kullanıcı mevcut ";
+        public static string AccessTokenCreated = "Token başarılı bir şekilde oluşturuldu";
+        public static string UserNotExist = "Kullanıcı Yok";
+        public static string UserEmailExist = "Kullanıcının Email'i Yok";
     }
 }
