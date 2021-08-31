@@ -2,6 +2,9 @@
 using Business.BusinessAspects;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Business;
@@ -24,7 +27,8 @@ namespace Business.Contrete
         {
             _carDal = carDal;
         }
-        [SecuredOperation("admin")]
+
+        [CacheAspect]
         public IDataResult<List<Car>> GetAll()
         {
             //if (DateTime.Now.Hour == 15)
@@ -33,13 +37,17 @@ namespace Business.Contrete
             //}
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarsListed);
         }
+
+        [CacheAspect]
+        //[PerformanceAspect(5)]
         public IDataResult<Car> GetById(int id)
         {
             return new SuccessDataResult<Car>(_carDal.Get(q => q.Id == id), Messages.CarsListed);
         }
 
-        
-        [ValidationAspect(typeof (CarValidator))]
+        [SecuredOperation("admin")]
+        [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarManager.Get")]
         public IResult Add(Car car)
         {
             _carDal.Add(car);
@@ -54,15 +62,16 @@ namespace Business.Contrete
             return new SuccessResult(Messages.CarDeleted);
         }
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarManager.Get")]
         public IResult Update(Car car)
         {
-            //IResult result = BusinessRules.Run(CheckIfCarIdExist(car.Id),
-            //    CheckIfCarNameExist(car.Description));
+            IResult result = BusinessRules.Run(CheckIfCarIdExist(car.Id),
+                CheckIfCarNameExist(car.Description));
 
-            //if (result != null)
-            //{
-            //    return result;
-            //}
+            if (result != null)
+            {
+                return result;
+            }
             _carDal.Update(car);
 
             return new SuccessResult(Messages.CarModified);
@@ -81,23 +90,31 @@ namespace Business.Contrete
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
-        //private IResult CheckIfCarIdExist(int carId)
-        //{
-        //    var result = _carDal.GetAll(c => c.Id == carId).Any();
-        //    if (!result)
-        //    {
-        //        return new ErrorResult(Messages.CarNotExist);
-        //    }
-        //    return new SuccessResult();
-        //}
-        //private IResult CheckIfCarNameExist(string name)
-        //{
-        //    var result = _carDal.GetAll(c => c.Description == name).Any();
-        //    if (!result)
-        //    {
-        //        return new ErrorResult(Messages.CarNotExist);
-        //    }
-        //    return new SuccessResult();
-        //}
+        private IResult CheckIfCarIdExist(int carId)
+        {
+            var result = _carDal.GetAll(c => c.Id == carId).Any();
+            if (!result)
+            {
+                return new ErrorResult(Messages.CarNotExist);
+            }
+            return new SuccessResult();
+        }
+        private IResult CheckIfCarNameExist(string name)
+        {
+            var result = _carDal.GetAll(c => c.Description == name).Any();
+            if (!result)
+            {
+                return new ErrorResult(Messages.CarNotExist);
+            }
+            return new SuccessResult();
+        }
+
+        //[TransactionScopeAspect]
+        public IResult AddTransactionalTest(Car car)
+        {
+            //_carDal.Update(car);
+            //_carDal.Add(car);
+            //return new SuccessResult(Messages.CarModified);
+        }
     }
 }
