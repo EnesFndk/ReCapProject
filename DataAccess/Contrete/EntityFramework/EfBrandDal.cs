@@ -12,6 +12,7 @@ namespace DataAccess.Contrete.EntityFramework
 {
     public class EfBrandDal : EfEntityRepositoryBase<Brand, ReCapContext>, IBrandDal
     {
-        
+
     }
+
 }

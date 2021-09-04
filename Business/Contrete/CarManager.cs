@@ -110,11 +110,11 @@ namespace Business.Contrete
         }
 
         //[TransactionScopeAspect]
-        public IResult AddTransactionalTest(Car car)
-        {
-            //_carDal.Update(car);
-            //_carDal.Add(car);
-            //return new SuccessResult(Messages.CarModified);
-        }
+        //public IResult AddTransactionalTest(Car car)
+        //{
+        //    _carDal.Update(car);
+        //    _carDal.Add(car);
+        //    return new SuccessResult(Messages.CarModified);
+        //}
     }
 }

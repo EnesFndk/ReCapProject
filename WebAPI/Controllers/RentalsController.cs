@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
@@ -18,6 +19,18 @@ namespace WebAPI.Controllers
         public RentalsController(IRentalManager rentalManager)
         {
             _rentalManager = rentalManager;
+        }
+
+        [HttpGet("getallbydetails")]
+        //[Authorize()]
+        public IActionResult GetRentalDetailDtos()
+        {
+            var result = _rentalManager.GetRentalDetailDtos();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
 
         [HttpGet("getall")]
