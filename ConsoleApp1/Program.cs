@@ -15,7 +15,7 @@ namespace ConsoleApp1
 
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
             Rental rental = new Rental();
-            rental.Id = 3;
+            rental.RentalId = 3;
             rental.CarId = 1;
             rental.CustomerId = 1;
             rental.RentDate = new DateTime(2021, 08, 15);

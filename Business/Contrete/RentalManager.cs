@@ -34,7 +34,7 @@ namespace Business.Contrete
 
         private bool CarDeliveryVerification(int carId)
         {
-            var result = _rentalDal.GetAll(r => r.CarId == carId).OrderByDescending(r=>r.Id).FirstOrDefault();
+            var result = _rentalDal.GetAll(r => r.CarId == carId).OrderByDescending(r=>r.RentalId).FirstOrDefault();
             if (result == null || result.ReturnDate == null || result.ReturnDate.Date < DateTime.Now.Date)
             {
                 return true;
@@ -61,7 +61,7 @@ namespace Business.Contrete
 
         public IDataResult<Rental> GetById(int rentalId)
         {
-            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id == rentalId));
+            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.RentalId == rentalId));
         }
         public IDataResult<List<RentalDetailDto>> GetRentalDetailDtos()
         {

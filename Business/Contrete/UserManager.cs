@@ -46,7 +46,7 @@ namespace Business.Contrete
 
         public IDataResult<User> GetById(int userId)
         {
-            return new SuccessDataResult<User>(_userDal.Get(u => u.Id == userId));
+            return new SuccessDataResult<User>(_userDal.Get(u => u.UserId == userId));
         }
 
         public IDataResult<List<OperationClaim>> GetClaims(User user)

@@ -35,6 +35,50 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpGet("getbybrand")]
+        //[Authorize()]
+        public IActionResult GetByBrand(int id)
+        {
+            var result = _carManager.GetCarsByBrandId(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpGet("getbycolor")]
+        //[Authorize()]
+        public IActionResult GetByColor(int id)
+        {
+            var result = _carManager.GetCarsByColorId(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        //[HttpGet("getcardetailsbybrandname")]
+        //public IActionResult GetCarDetailsByBrandName(string brandName)
+        //{
+        //    var result = _carManager.GetCarDetailsByBrandName(brandName);
+        //    if (result.Success)
+        //    {
+        //        return Ok(result);
+        //    }
+        //    return BadRequest(result);
+        //}
+
+        //[HttpGet("getcardetailsbycolorname")]
+        //public IActionResult GetCarDetailsByColorName(string colorName)
+        //{
+        //    var result = _carManager.GetCarDetailsByColorName(colorName);
+        //    if (result.Success)
+        //    {
+        //        return Ok(result);
+        //    }
+        //    return BadRequest(result);
+        //}
         [HttpGet("getall")]
         //[Authorize()]
         public IActionResult GetAll()

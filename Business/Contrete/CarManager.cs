@@ -42,7 +42,7 @@ namespace Business.Contrete
         //[PerformanceAspect(5)]
         public IDataResult<Car> GetById(int id)
         {
-            return new SuccessDataResult<Car>(_carDal.Get(q => q.Id == id), Messages.CarsListed);
+            return new SuccessDataResult<Car>(_carDal.Get(q => q.CarId == id), Messages.CarsListed);
         }
 
         [SecuredOperation("admin")]
@@ -65,7 +65,7 @@ namespace Business.Contrete
         [CacheRemoveAspect("ICarManager.Get")]
         public IResult Update(Car car)
         {
-            IResult result = BusinessRules.Run(CheckIfCarIdExist(car.Id),
+            IResult result = BusinessRules.Run(CheckIfCarIdExist(car.CarId),
                 CheckIfCarNameExist(car.Description));
 
             if (result != null)
@@ -77,14 +77,14 @@ namespace Business.Contrete
             return new SuccessResult(Messages.CarModified);
         }
 
-        public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
+        public IDataResult<List<CarDetailDto>> GetCarsByBrandId(int brandId)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(q => q.BrandId == brandId).ToList());
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails().Where(q => q.brandId == brandId).ToList());
         }
 
-        public IDataResult<List<Car>> GetCarsByColorId(int colorId)
+        public IDataResult<List<CarDetailDto>> GetCarsByColorId(int colorId)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(q => q.ColorId == colorId).ToList());
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails().Where(q => q.colorId == colorId).ToList());
         }
         public IDataResult<List<CarDetailDto>> GetCarDetailDtos()
         {
@@ -92,7 +92,7 @@ namespace Business.Contrete
         }
         private IResult CheckIfCarIdExist(int carId)
         {
-            var result = _carDal.GetAll(c => c.Id == carId).Any();
+            var result = _carDal.GetAll(c => c.CarId == carId).Any();
             if (!result)
             {
                 return new ErrorResult(Messages.CarNotExist);
@@ -108,6 +108,17 @@ namespace Business.Contrete
             }
             return new SuccessResult();
         }
+
+        //public IDataResult<List<CarDetailDto>> GetCarDetailsByColorName(string colorName)
+        //{
+        //    return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.ColorName == colorName));
+        //}
+
+        //public IDataResult<List<CarDetailDto>> GetCarDetailsByBrandName(string brandName)
+        //{
+        //    return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.BrandName == brandName));
+        //}
+
 
         //[TransactionScopeAspect]
         //public IResult AddTransactionalTest(Car car)

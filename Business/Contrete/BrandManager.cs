@@ -20,7 +20,7 @@ namespace Business.Contrete
 
         public IResult Add(Brand brand)
         {
-            if (brand.Name.Length < 2)
+            if (brand.BrandName.Length < 2)
             {
                 return new ErrorResult(Messages.BrandNameInvalid);
             }
@@ -44,7 +44,7 @@ namespace Business.Contrete
 
         public IDataResult<Brand> GetById(int brandId)
         {
-            return new SuccessDataResult<Brand>(_brandDal.Get(b => b.Id == brandId));
+            return new SuccessDataResult<Brand>(_brandDal.Get(b => b.BrandId == brandId));
         }
 
         public IResult Update(Brand brand)

@@ -17,9 +17,9 @@ namespace DataAccess.Contrete.EntityFramework
             {
                 var result = from operationClaim in context.OperationClaims
                              join UserOperationClaim in context.UserOperationClaims
-                             on operationClaim.Id equals UserOperationClaim.OperationClaimId
-                             where UserOperationClaim.UserId == user.Id
-                             select new OperationClaim { Id = operationClaim.Id, Name = operationClaim.Name };
+                             on operationClaim.OperationClaimId equals UserOperationClaim.OperationClaimId
+                             where UserOperationClaim.UserId == user.UserId
+                             select new OperationClaim { OperationClaimId = operationClaim.OperationClaimId, OperationClaimName = operationClaim.OperationClaimName };
                 return result.ToList();
             }
         }

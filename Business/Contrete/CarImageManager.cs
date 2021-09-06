@@ -67,12 +67,12 @@ namespace Business.Contrete
 
         public IDataResult<CarImage> GetById(int carImagedId)
         {
-            return new SuccessDataResult<CarImage>(_carImageDal.Get(ca => ca.Id == carImagedId));
+            return new SuccessDataResult<CarImage>(_carImageDal.Get(ca => ca.CarImageId == carImagedId));
         }
 
         public IResult Update(IFormFile formfile, CarImage carImage)
         {
-            var carImg = _carImageDal.Get(x => x.Id == carImage.Id);
+            var carImg = _carImageDal.Get(x => x.CarImageId == carImage.CarImageId);
             string webRootPath = _hostingEnvironment.WebRootPath;
 
 

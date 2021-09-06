@@ -19,18 +19,18 @@ namespace DataAccess.Contrete.EntityFramework
             {
                 var result = from r in context.Rentals
                              join cr in context.Cars
-                             on r.CarId equals cr.Id
+                             on r.CarId equals cr.CarId
                              join cs in context.Customers
                              on r.CustomerId equals cs.UserId
                              join br in context.Brands
-                             on cr.BrandId equals br.Id
+                             on cr.BrandId equals br.BrandId
                              join u in context.Users
-                             on cs.UserId equals u.Id
+                             on cs.UserId equals u.UserId
 
                              select new RentalDetailDto
                              {
-                                 RentalId = r.Id,
-                                 BrandName = br.Name,
+                                 RentalId = r.RentalId,
+                                 BrandName = br.BrandName,
                                  CustomerName = u.FirstName + " " + u.LastName,
                                  RentDate = r.RentDate,
                                  ReturnDate = r.ReturnDate
