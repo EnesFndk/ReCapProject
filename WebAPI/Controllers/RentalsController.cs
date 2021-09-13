@@ -33,6 +33,18 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getlastrentalbycarid")]
+        //[Authorize()]
+        public IActionResult GetLastRentalByCarId(int carId)
+        {
+            var result = _rentalManager.GetLastRentalByCarId(carId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpGet("getall")]
         public IActionResult GetAll()
         {

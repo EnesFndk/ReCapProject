@@ -109,6 +109,15 @@ namespace Business.Contrete
             return new SuccessResult();
         }
 
+        public IDataResult<List<CarDetailDto>> GetCarDetailPageById(int id)
+        {
+            if (_carDal.GetCarDetails(c => c.CarId == id) != null)
+            {
+                return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.CarId == id), Messages.RecordFound);
+            }
+            return new ErrorDataResult<List<CarDetailDto>>(Messages.IdInvalid);
+        }
+
         //public IDataResult<List<CarDetailDto>> GetCarDetailsByColorName(string colorName)
         //{
         //    return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.ColorName == colorName));

@@ -31,10 +31,21 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getbyid")]
-        public IActionResult GetById(int id)
+        [HttpGet("getbycarid")]
+        public IActionResult GetByCarId(int carId)
         {
-            var result = _carImageManager.GetById(id);
+            var result = _carImageManager.GetCarImageById(carId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getallimagebycarid")]
+        public IActionResult GetAllImageByCarId(int id)
+        {
+            var result = _carImageManager.GetAllImageByCarId(id);
             if (result.Success)
             {
                 return Ok(result);

@@ -12,6 +12,7 @@ namespace Business.Constants
         public static string CarNotRented = "Araba kiralanmadı";
         public static string CarRented = "Araba kiralandı";
         public static string CarNotExist = "Araba mevcut değil";
+        public static string CarNotReturned = "Araba dönmedi";
         public static string CarExist = "Araba mevcut";
         public static string BrandAdded = "Marka Eklendi";
         public static string BrandDeleted = "Marka Silindi";
@@ -25,7 +26,7 @@ namespace Business.Constants
         public static string CustomerAdded = "Müşteri Eklendi";
         public static string CustomerDeleted = "Müşteri Silindi";
         public static string CustomerModified = "Müşteri Güncellendi";
-        public static string RentalAdded = "Kiralama işlemi Eklendi";
+        public static string RentalAdded = "Kiralama işlemi yapıldı";
         public static string RentalDeleted = "Kiralama işlemi Silindi";
         public static string RentalModified = "Kiralama işlemi Güncellendi";
         public static string CarImageAdded = "Araba Resmi Eklendi";
@@ -33,7 +34,7 @@ namespace Business.Constants
         public static string CarImageModified = "Araba Resmi Güncellendi";
         public static string CarsImageListed = "Araba Resimleri Listelendi";
         public static string CarImageNameInvalid = "Araba resmi Geçersiz";
-        public static string CarImageLimit = "Bir arabanın en fazla 5 resmi olabilir.";
+        public static string CarImageLimit = "Bir arabanın en fazla 10 resmi olabilir.";
         public static string CarName = "Araba ismi en az 2 karakterli olmalıdır.";
         public static string BrandNameInvalid = "Araba Markası Geçersiz";
         public static string MaintenanceTime = "Sistem Bakımda";
@@ -53,5 +54,18 @@ namespace Business.Constants
         public static string AccessTokenCreated = "Token başarılı bir şekilde oluşturuldu";
         public static string UserNotExist = "Kullanıcı Yok";
         public static string UserEmailExist = "Kullanıcının Email'i Yok";
+        public static string RecordsListed = "Kayıtlar listelendi.";
+        public static string ImageFound = "Resim bulundu";
+        public static string ImagesListed = "Resimler listelendi";
+        public static string RecordFound = "Kayıt Bulundu";
+        public static string IdInvalid = "Id geçersiz.";
+
+        public static string CreditCardAdded = "Kredi kartı Eklendi";
+        public static string CreditCardDeleted = "Kredi kartı Silindi";
+        public static string CreditCardModified = "Kredi kartı Güncellendi";
+        public static string CreditCardListed = "Kredi kartları Listelendi";
+
+        public static string BalanceLimit = "Yetersiz Bakiye";
+        public static string PaymentAdded = "Ödeme alındı";
     }
 }

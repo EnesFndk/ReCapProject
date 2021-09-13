@@ -7,7 +7,6 @@ using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Business.Contrete
 {
@@ -23,13 +22,23 @@ namespace Business.Contrete
         public IResult Add(Rental rental)
         {
 
-            if (!CarDeliveryVerification(rental.CarId))
+            var result = CheckRentalDate(rental);
+            if (result.Success)
             {
-                return new ErrorResult(Messages.CarNotRented);
+                _rentalDal.Add(rental);
+                return new SuccessResult(Messages.RentalAdded);
             }
-            _rentalDal.Add(rental);
+            return new ErrorResult(result.Message);
+        }
 
-            return new SuccessResult(Messages.RentalAdded);
+        private IResult CheckRentalDate(Rental rental)
+        {
+            var rentals = _rentalDal.GetAll().Where(r => r.ReturnDate.CompareTo(rental.RentDate) > 0).ToList();
+            if (rentals.Count!=0)
+            {
+                return new ErrorResult(Messages.CarNotReturned);
+            }
+            return new SuccessResult();
         }
 
         private bool CarDeliveryVerification(int carId)
@@ -68,5 +77,14 @@ namespace Business.Contrete
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails());
         }
 
+        public IDataResult<Rental> GetLastRentalByCarId(int carId)
+        {
+            return new SuccessDataResult<Rental>(_rentalDal.GetAll().Where(r => r.CarId == carId).LastOrDefault());
+        }
+
+        public IDataResult<List<Rental>> GetByCustomerId(int customerId)
+        {
+            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll().Where(r => r.CustomerId == customerId).ToList());
+        }
     }
 }

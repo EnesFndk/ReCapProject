@@ -36,6 +36,19 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getcardetailpagebyid")]
+        //[Authorize()]
+        public IActionResult GetCarDetailPageById(int id)
+        {
+            
+            var result = _carManager.GetCarDetailPageById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpGet("getbybrand")]
         //[Authorize()]
         public IActionResult GetByBrand(int id)
