@@ -45,7 +45,7 @@ namespace Business.Contrete
             return new SuccessDataResult<Car>(_carDal.Get(q => q.CarId == id), Messages.CarsListed);
         }
 
-        [SecuredOperation("admin")]
+        //[SecuredOperation("admin")]
         [ValidationAspect(typeof(CarValidator))]
         [CacheRemoveAspect("ICarManager.Get")]
         public IResult Add(Car car)
