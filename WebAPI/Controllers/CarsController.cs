@@ -112,7 +112,7 @@ namespace WebAPI.Controllers
             var result = _carManager.GetById(id);
             if (result.Success==true)
             {
-                return Ok(result.Data);
+                return Ok(result);
             }
             return BadRequest(result.Message);
         }
